@@ -27,7 +27,7 @@ class PatientsViewModel @Inject constructor (private val repository: PatientsRep
     init{
     getPatients()
 }
-   private fun getPatients() {
+    fun getPatients() {
         viewModelScope.launch {
             try {
                 _patientsStateFlow.emit(repository.getPatients())

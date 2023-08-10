@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace 'com.example.traningpatient3'
+    namespace 'com.example.traningpatient3.presentation'
     compileSdk 33
 
     defaultConfig {
@@ -48,6 +48,9 @@ dependencies {
 
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1'
     implementation 'androidx.navigation:navigation-fragment-ktx:2.5.1'
+
+    //swipe refresh
+    implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
 
 
 

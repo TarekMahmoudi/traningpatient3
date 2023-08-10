@@ -2,12 +2,14 @@ package com.example.traningpatient3.presentation.feature.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.traningpatient3.databinding.RowPatientBinding
 import com.example.traningpatient3.domain.model.patients.PatientRemoteModel
+import com.example.traningpatient3.presentation.databinding.RowPatientBinding
 
-class PatientsAdapter(private val patients: List<PatientRemoteModel>) :
-    RecyclerView.Adapter<PatientsAdapter.PatientViewHolder>() {
+class PatientsAdapter() :
+    ListAdapter<PatientRemoteModel,PatientsAdapter.PatientViewHolder>(diffCallBack) {
 
     var lastSelected = -1
 
@@ -22,36 +24,49 @@ class PatientsAdapter(private val patients: List<PatientRemoteModel>) :
     }
 
     override fun onBindViewHolder(holder: PatientViewHolder, position: Int) {
-        val model = patients[position]
+       val model = getItem(position)
         holder.bind(model, position)
     }
 
-    override fun getItemCount(): Int {
-        return patients.size
-    }
 
 
-   inner class PatientViewHolder(private val binding: RowPatientBinding) :
+
+   inner class PatientViewHolder(private val  binding: RowPatientBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(model: PatientRemoteModel, position: Int) {
-            binding.model = model
-
-            binding.cardView.setOnClickListener {
-                if (lastSelected != -1){
-                    patients[lastSelected].selected = false
-                    notifyItemChanged(lastSelected)
-                }
-                lastSelected = position
-                patients[position].selected = true
-
-                notifyItemChanged(position)
-
-            }
+       fun bind(model: PatientRemoteModel, position: Int) {
+           binding.model = model
 
 
+           binding.cardView.setOnClickListener {
+               if (lastSelected != -1) {
+                   getItem(position).selected = false
+                   notifyItemChanged(lastSelected)
+               }
+               lastSelected = position
+               getItem(position).selected = true
 
+               notifyItemChanged(position)
+
+           }
+
+
+       }
+   }
+    private object diffCallBack : DiffUtil.ItemCallback<PatientRemoteModel>(){
+        override fun areItemsTheSame(
+            oldItem: PatientRemoteModel,
+            newItem: PatientRemoteModel
+        ): Boolean {
+            return  oldItem.id == newItem.id
+        }
+
+        override fun areContentsTheSame(
+            oldItem: PatientRemoteModel,
+            newItem: PatientRemoteModel
+        ): Boolean {
+            return oldItem == newItem
+        }
     }
-}
-
     }
+

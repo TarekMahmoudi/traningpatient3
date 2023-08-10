@@ -8,4 +8,8 @@
         android:id="@+id/patientsFragment"
         android:name="com.example.traningpatient3.presentation.feature.patients.PatientsFragment"
         android:label="PatientsFragment" />
+    <fragment
+        android:id="@+id/addPatientFragment"
+        android:name="com.example.traningpatient3.presentation.feature.add.AddPatientFragment"
+        android:label="AddPatientFragment" />
 </navigation>

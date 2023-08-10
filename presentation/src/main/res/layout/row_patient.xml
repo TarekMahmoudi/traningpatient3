@@ -8,6 +8,7 @@
             name="model"
             type="com.example.traningpatient3.domain.model.patients.PatientRemoteModel" />
 
+
     </data>
 
     <com.google.android.material.card.MaterialCardView
